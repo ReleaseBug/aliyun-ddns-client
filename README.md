@@ -1,5 +1,14 @@
 # 写在前面的话
 
+python ez_setup.py
+结果报错
+urllib.error.HTTPError: HTTP Error 403: SSL is required
+再问度娘，居然查不到！
+没关系，咱有经验，查英文的。一下就找到解决方案了：
+直接下载get-pip.py，然后运行
+downloading https://bootstrap.pypa.io/get-pip.py and running python get-pip.py
+
+
 如果大家觉得还好用的话，有时间可以去[**hdget**](http://www.hdget.com)帮忙点击下广告支持服务器运营, 以便后续提供更好的支持。有时候我们一个微小不经意的举动，却是最好的肯定与支持，先谢谢了!
 
 Support me by clicking AD in websiste [**hdget**](http://www.hdget.com) if you have free time, thanks in advance!
