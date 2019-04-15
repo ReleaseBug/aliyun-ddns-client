@@ -69,7 +69,16 @@ class DDNSUtils(object):
         @return  IP address or None
         """
         try:
-            ret = requests.get("http://members.3322.org/dyndns/getip")
+            #ret = requests.get("http://members.3322.org/dyndns/getip") 不容易访问
+            #ret = requests.get("http://icanhazip.com") 不准
+            ret = requests.get("http://www.123cha.com")
+            ret.raise_for_status()  # 请求出错，则直接抛出错误
+            ret.encoding = 'utf-8'
+            # print(r.text)  # debug
+            htree = html.fromstring(ret.content.decode('utf-8'))
+            # 处理选择进入图集页面
+            trueIpText = htree.xpath("//div[@class='location']//a")
+            print(trueIpText[0].text)
         except requests.RequestException as ex:
             cls.err("network problem:{0}".format(ex))
             return None
@@ -79,7 +88,8 @@ class DDNSUtils(object):
                     .format(ret.status_code, ret.content))
             return None
 
-        return ret.content.decode('utf-8').rstrip("\n")
+        #return ret.content.decode('utf-8').rstrip("\n")
+        return trueIpText[0].text.rstrip("\n")
 
     @classmethod
     def get_interface_address(cls, ifname):
